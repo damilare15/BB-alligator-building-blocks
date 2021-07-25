@@ -49,7 +49,7 @@ double Find_Alligator_Trend(bool Trend_Up, bool Trend_Down)
    if(Trend_Up)
    {
       if(Jaw_Curr<Teeth_Curr && Teeth_Curr<Lips_Curr && Jaw_Curr>Jaw_Prev && Teeth_Curr>Teeth_Prev && Lips_Curr>Lips_Prev)
-      
+      Alert("Alligator looking for long trades ");
       return true; 
       
    }
@@ -58,7 +58,7 @@ double Find_Alligator_Trend(bool Trend_Up, bool Trend_Down)
    else if(Trend_Down)
    {
        if(Jaw_Curr>Teeth_Curr && Teeth_Curr>Lips_Curr && Jaw_Curr<Jaw_Prev && Teeth_Curr<Teeth_Prev && Lips_Curr<Lips_Prev)
-       
+       Alert("Alligator looking for short trades");
        return true;
    }
    
