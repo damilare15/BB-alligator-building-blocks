@@ -18,42 +18,54 @@ input int LipsShift = 3;
 //| Script program start function                                    |
 //+------------------------------------------------------------------+
 
-void Find_Alligator_Trend();
+
 
 void OnStart()
   {
 //---
 
-      Find_Alligator_Trend();
-         
+        
   }
   
-void Find_Alligator_Trend()
+
+    
+  
+
+ 
+//+------------------------------------------------------------------+
+double Find_Alligator_Trend(bool Trend_Up, bool Trend_Down)
 {
 	
-   bool Trend_Up = false;
-   bool Trend_Down = false;
    double Jaw_Curr = iAlligator(Symbol(),0,JawPeriod,JawShift,TeethPeriod,TeethShift,LipsPeriod,LipsShift,MODE_SMMA,PRICE_MEDIAN,MODE_GATORJAW,0);
    double Teeth_Curr = iAlligator(Symbol(),0,JawPeriod,JawShift,TeethPeriod,TeethShift,LipsPeriod,LipsShift,MODE_SMMA,PRICE_MEDIAN,MODE_GATORTEETH,0);
    double Lips_Curr = iAlligator(Symbol(),0,JawPeriod,JawShift,TeethPeriod,TeethShift,LipsPeriod,LipsShift,MODE_SMMA,PRICE_MEDIAN,MODE_GATORLIPS,0);
    double Jaw_Prev = iAlligator(Symbol(),0,JawPeriod,JawShift,TeethPeriod,TeethShift,LipsPeriod,LipsShift,MODE_SMMA,PRICE_MEDIAN,MODE_GATORJAW,1);
    double Teeth_Prev = iAlligator(Symbol(),0,JawPeriod,JawShift,TeethPeriod,TeethShift,LipsPeriod,LipsShift,MODE_SMMA,PRICE_MEDIAN,MODE_GATORTEETH,1);
    double Lips_Prev = iAlligator(Symbol(),0,JawPeriod,JawShift,TeethPeriod,TeethShift,LipsPeriod,LipsShift,MODE_SMMA,PRICE_MEDIAN,MODE_GATORLIPS,1);
-   if(Jaw_Curr<Teeth_Curr && Teeth_Curr<Lips_Curr && Jaw_Curr>Jaw_Prev && Teeth_Curr>Teeth_Prev && Lips_Curr>Lips_Prev) 
-      {
-         Trend_Up = true;
-      }
-   if(Jaw_Curr>Teeth_Curr && Teeth_Curr>Lips_Curr && Jaw_Curr<Jaw_Prev && Teeth_Curr<Teeth_Prev && Lips_Curr<Lips_Prev)
-      {
-          Trend_Down = true;
-      }
    
-   // check for the alligator trend
-   if(Trend_Up = true )
-   Alert("Alligator is looking for long trades ");
+   double Alligator_Trend;
    
-   else if(Trend_Down = true)
-   Alert("Alligator is looking for bearish trades");
-
-} 
-//+------------------------------------------------------------------+
+   // buy signal 
+   if(Trend_Up)
+   {
+      if(Jaw_Curr<Teeth_Curr && Teeth_Curr<Lips_Curr && Jaw_Curr>Jaw_Prev && Teeth_Curr>Teeth_Prev && Lips_Curr>Lips_Prev)
+      
+      return true; 
+      
+   }
+   
+   // sell signal
+   else if(Trend_Down)
+   {
+       if(Jaw_Curr>Teeth_Curr && Teeth_Curr>Lips_Curr && Jaw_Curr<Jaw_Prev && Teeth_Curr<Teeth_Prev && Lips_Curr<Lips_Prev)
+       
+       return true;
+   }
+   
+   return Alligator_Trend;
+   
+}   
+   
+   
+      
+  
