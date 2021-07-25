@@ -1,2 +1,3 @@
-# BB-alligator-building-blocks
-gives signals on the direction of the markets and gives entries
+# awesome alligator strat
+
+gives signals on upcoming trends. Showing of the market is going long or short
