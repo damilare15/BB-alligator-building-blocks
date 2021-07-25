@@ -29,10 +29,13 @@
 // #import
 //+------------------------------------------------------------------+
 
+// buy signal if prev_Candle_Bearish and Curr_Candle_Bullish
+// sell signal if Prev_Candle_Bullish and Curr_Candle_Bullish
+
 double get_Prev_Candle(bool Prev_Candle_Bearish, bool Prev_Candle_Bullish)
 {
    double Prev_Candle;
-   if(Prev_Candle_Bearish)
+   if(Prev_Candle_Bearish) 
    {
       if((Open[1] - Close[1]) > 0) 
       
