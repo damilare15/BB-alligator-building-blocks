@@ -29,48 +29,90 @@
 // #import
 //+------------------------------------------------------------------+
 
-// buy signal if prev_Candle_Bearish and Curr_Candle_Bullish
-// sell signal if Prev_Candle_Bullish and Curr_Candle_Bullish
 
-double get_Prev_Candle(bool Prev_Candle_Bearish, bool Prev_Candle_Bullish)
+
+
+      
+      
+double Awesome_First_Entry(bool isLong)
 {
-   double Prev_Candle;
-   if(Prev_Candle_Bearish) 
-   {
-      if((Open[1] - Close[1]) > 0) 
+    double Awesome_curr = iAO(NULL,0,0);
+    double Awesome_prev = iAO(NULL,0,1);
+
+
+    double Awesome_Entry_One;
+    if(isLong) // buy signal 
+    {
+      // if awesome oscillator crosses to the upside
+      if(Awesome_prev < 0 && Awesome_curr > 0)
       
       return true;
-   }
-   
-   else if(Prev_Candle_Bullish)
-   {
-      if((Close[1] - Open[1]) < 0)
-      
-      return true;
-   }
-   
-   return Prev_Candle;
-}
-      
-double get_Curr_Candle(bool Curr_Candle_Bearish, bool Curr_Candle_Bullish)
-{
-   double Curr_Candle;
-   if(Curr_Candle_Bearish)
-   {
-      if((Open[0] - Close[0]) > 0)
-      
-      return true;
-   }
-   else if(Curr_Candle_Bullish)
-   {
-      if((Close[0] - Open[0]) < 0)
-      
-      return true;
-   }
-   
-   return Curr_Candle;
-}      
-      
+    }
     
+    else // sell signal
+    {
+      // if awesome oscillator crosses to the downside
+      if(Awesome_prev > 0 && Awesome_curr < 0)
+      
+      return true;
+    }
+    
+    return Awesome_Entry_One;
+}
+
+
+
+double Awesome_CandleStick_Movements(bool is_Signal_Bullish)
+{
+
+   double open_curr = iOpen(_Symbol,0,0);
+   double close_curr = iClose(_Symbol,0,0);
+   double open_prev = iOpen(_Symbol,0,1);
+   double close_prev = iClose(_Symbol,0,1);
+   
+   double CandleStick_Entries;
+   
+   if(is_Signal_Bullish) // buy signal
+   {
+      // if previous candlestick is bearish and current candlestick is bullish
+      if((open_prev - close_prev) > 0 && (close_curr - open_curr) < 0)
+      
+      return true;
+
+   }
+   else //sell signal
+   {
+      // if previous candlestick is bullish and current candlestick is bearish
+      if((close_prev - open_prev) < 0 && (open_curr - close_curr) > 0)
+      
+      return true;
+   }
+   return CandleStick_Entries;
+}   
       
       
+      
+double Awesome_Second_Entry(bool isLong)
+{
+    double Awesome_curr = iAO(NULL,0,0);
+    double Awesome_prev = iAO(NULL,0,1);
+    
+    double Awesome_Entry_One;
+    if(isLong)// buy signal
+    {
+      // if awesome prev and awesome curr are above zero and awesome candlemovements is long
+      if((Awesome_prev && Awesome_curr) > 0 && Awesome_CandleStick_Movements(true))
+      
+      return true;
+    }
+    
+    else // if awesome prev and awesome curr are below zero and awesome candlemovements is short
+    {
+      if((Awesome_prev && Awesome_curr) < 0 && Awesome_CandleStick_Movements(false))
+      
+      return true;
+    }
+    
+    return Awesome_Entry_One;
+
+}
