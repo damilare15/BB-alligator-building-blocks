@@ -30,31 +30,7 @@
 //+------------------------------------------------------------------+
 
 
-void Awesome_CandleStick_Movements()
-{
-   Alert("");
-   
-   bool Signal_Bullish = false;
-   bool Signal_Bearish = false;
-         
-   // buy signal         
-   // if previous candlestick is bearish and current candlestick is bullish
-   if((Open[1] - Close[1]) > 0 && (Close[0] - Open[0]) > 0 )
-   {
-      Signal_Bullish = true;
-      Alert("signal is bearish");
-   }  
-   
-   //sell signal
-   // if previous candlestick is bullish and current candlestick is bearish
-   if( (Close[1] - Open[1]) > 0 && (Open[0] - Close[0]) > 0)
-   {
-      Signal_Bearish = true;
-      Alert("signal is bullish");
-   }
-      
-   
-}   
+
 
 
 void Awesome_Entry_Signal()
@@ -70,13 +46,13 @@ void Awesome_Entry_Signal()
    if(Awesome_curr > Awesome_prev && Bid > Baseline)// buy signal
    {
      Signal_Long = true; 
-     Alert("signal is bullish");
+     
    }
    if(Awesome_curr < Awesome_prev && Bid  < Baseline)// sell signal
    {
       
       Signal_Short = true;
-      Alert("signal is bearish");
+      
    }
    
    
